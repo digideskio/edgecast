@@ -1,4 +1,4 @@
-require 'cdn'
+require 'edgecast'
 
 module Edgecast
   describe CDN do
@@ -52,6 +52,24 @@ module Edgecast
 
       it 'submits a put request to the purge API with the asset description' do
         subject.purge(asset)
+      end
+    end
+
+    describe '#load' do
+      let(:asset) { "/fake_asset" }
+      let(:options) do
+        {
+          :body => subject.asset_description(asset).to_json,
+          :headers => subject.headers
+        }
+      end
+
+      before do
+        subject.class.should_receive(:put).with("/v2/mcc/customers/#{account_number}/edge/load", options)
+      end
+
+      it 'submits a put request to the load API with the asset description' do
+        subject.load(asset)
       end
     end
   end

@@ -12,3 +12,7 @@ Example:
     require 'edgecast'
     cdn = Edgecast::CDN.new("account_number","api_key")
     cdn.purge("http://example.com/assets/some_file.js")
+
+## Testing
+    bundle
+    rspec spec/edgetcast/cdn_spec.rb

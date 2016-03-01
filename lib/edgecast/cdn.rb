@@ -36,5 +36,13 @@ module Edgecast
       }
       self.class.put("/v2/mcc/customers/#{@account_number}/edge/purge",options)
     end
+
+    def load(asset)
+      options = {
+        :body => asset_description(asset).to_json,
+        :headers => headers
+      }
+      self.class.put("/v2/mcc/customers/#{@account_number}/edge/load",options)
+    end
   end
 end
